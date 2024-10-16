@@ -1,0 +1,63 @@
+1
+
+1. CREATE TABLE Student (Rollno INT PRIMARY KEY, Name VARCHAR(50), Branch VARCHAR(50));
+2. CREATE TABLE Exam (Rollno INT, S_code VARCHAR(10), Marks INT, P_code VARCHAR(10), FOREIGN KEY (Rollno) REFERENCES Student(Rollno));
+3. used to specify rules for the data in a table.
+	
+	primary key:
+	CREATE TABLE Student (Rollno INT PRIMARY KEY, Name VARCHAR(50), Branch VARCHAR(50) NOT NULL);
+	
+	foreign key:
+	CREATE TABLE Exam (ExamID INT PRIMARY KEY, Rollno INT, S_code VARCHAR(10) UNIQUE, Marks INT, P_code VARCHAR(10) NOT NULL, FOREIGN KEY (Rollno) 	REFERENCES Student(Rollno));
+
+4. CREATE VIEW Student_View AS SELECT Rollno, Name, Branch FROM Student;
+5. CREATE TABLE User (UserID INT PRIMARY KEY, UserName VARCHAR(50), Password VARCHAR(50));
+6. Structured query language (SQL) is  programming language for storing and processing information in a relational database.
+	
+	Create Student table:
+	CREATE TABLE Student (Rollno INT PRIMARY KEY, Name VARCHAR(50), Branch VARCHAR(50));
+	
+	Create Exam table with Foreign Key on Rollno:
+	CREATE TABLE Exam (ExamID INT PRIMARY KEY, Rollno INT, S_code VARCHAR(10), Marks INT, P_code VARCHAR(10), FOREIGN KEY (Rollno) REFERENCES 	Student(Rollno));
+	
+
+7. database object that is associated with a table and automatically executes a set of SQL statements when a specific event occurs on that table.
+
+	CREATE TRIGGER after_employee_insert AFTER INSERT ON Employee FOR EACH ROW BEGIN INSERT INTO Log_Table(EmployeeID, Action) VALUES (NEW.EmployeeID, 	'Inserted'); END;
+8. 	DBMS: A Database Management System (DBMS) is a software that allows users to store, modify, and extract information from a database. It does not 	support relationships between tables.
+	
+	RDBMS: A Relational Database Management System (RDBMS) stores data in the form of related tables and supports relationships using primary and 	foreign keys.
+9. Normalization is the process of organizing data in a database.
+
+.................................................................................................................................
+
+2
+
+1. SELECT First_Name AS "Employee Name" FROM Employee;
+2. SELECT First_Name, YEAR(Joining_date) AS Joining_Year, MONTH(Joining_date) AS Joining_Month, DAY(Joining_date) AS Joining_Day FROM Employee;
+3. SELECT * FROM Employee ORDER BY First_Name ASC, Salary DESC;
+4. SELECT * FROM Employee WHERE First_Name LIKE '%o%';
+5. SELECT * FROM Employee WHERE MONTH(Joining_date) = 1;
+6. SELECT Department, SUM(Salary) AS Total_Salary FROM Employee GROUP BY Department ORDER BY Total_Salary DESC;
+7. SELECT Department, MAX(Salary) AS Max_Salary FROM Employee GROUP BY Department ORDER BY Max_Salary ASC;
+8. SELECT e.First_Name, i.Incentive_amount FROM Employee e JOIN Incentive i ON e.Employee_ref_id = i.Employee_ref_id WHERE i.Incentive_amount > 3000;
+9. SELECT MAX(Salary) AS Second_Highest_Salary FROM Employee WHERE Salary < (SELECT MAX(Salary) FROM Employee);
+10. SELECT e.First_Name, i.Incentive_amount FROM Employee e LEFT JOIN Incentive i ON e.Employee_ref_id = i.Employee_ref_id;
+11. CREATE VIEW Employee_Summary AS SELECT First_Name, Last_Name, Salary FROM Employee;
+12. CREATE PROCEDURE Get_Max_Salary_By_Department() BEGIN SELECT Department, MAX(Salary) AS Max_Salary FROM Employee GROUP BY Department; END;
+13. CREATE TRIGGER after_employee_insert AFTER INSERT ON Employee FOR EACH ROW BEGIN INSERT INTO Employee_Summary (First_Name, Last_Name, Salary) VALUES 	(NEW.First_Name, NEW.Last_Name, NEW.Salary); END;
+
+.................................................................................................................................
+
+3
+
+1. SELECT * FROM orders WHERE amt > 1000;
+2. SELECT SNAME, CITY FROM salesperson WHERE CITY = 'London' AND COMM > 0.10;
+3. SELECT * FROM salesperson WHERE CITY IN ('Barcelona', 'London');
+4. SELECT * FROM salesperson WHERE COMM > 0.10 AND COMM < 0.12;
+5. SELECT * FROM customer WHERE RATING > 100 OR CITY = 'Roe';
+6. SELECT * FROM orders WHERE amt > 0 AND amt IS NOT NULL;
+7. SELECT COUNT(DISTINCT SNo) FROM orders;
+8. SELECT SNo, MAX(amt) AS largest_order, order_date FROM orders GROUP BY SNo, order_date;
+
+
